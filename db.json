@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "firstName": "ijoji",
+      "email": "jbjb",
+      "gender": "male",
+      "city": "pune",
+      "mobile": 98
+    },
+    {
+      "id": 2,
+      "firstName": "",
+      "email": "",
+      "gender": "male",
+      "city": "pune",
+      "mobile": ""
+    }
+  ],
+  "signupuser": [
+    {
+      "email": "sagar@123",
+      "password": "12345",
+      "mobile": 7887,
+      "name": "sagar",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
