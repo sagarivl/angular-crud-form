@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color: #fff" href="#"
-      >Person Information-CRUD App</a
-    >
+    <a class="navbar-brand" style="color: #fff">Person Information-CRUD App</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -17,11 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a
-            class="nav-link active"
-            style="color: #fff"
-            aria-current="page"
-            href="#"
+          <a class="nav-link active" style="color: #fff" aria-current="page"
             >home</a
           >
         </li>
@@ -32,6 +26,7 @@
         class="btn btn-success mx-3"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        (click)="clickAddInfoBtn()"
       >
         Add Info
       </button>
@@ -41,7 +36,7 @@
     </div>
   </div>
 </nav>
-<table class="table mt-3">
+<table class="table mt-3" *ngIf="allData?.length">
   <thead>
     <tr>
       <th scope="co1">Employee ID</th>
@@ -65,7 +60,15 @@
       <td>{{ row.city }}</td>
 
       <td>
-        <button class="btn btn-primary btn-sm me-md-2">Edit</button>
+        <button
+          class="btn btn-primary btn-sm me-md-2"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="onEdit(row)"
+        >
+          Edit
+        </button>
 
         <button (click)="deletePersonalInfo(row)" class="btn btn-danger btn-sm">
           Delete
@@ -74,6 +77,9 @@
     </tr>
   </tbody>
 </table>
+<h3 class="text-center mt-5" *ngIf="allData?.length === 0">
+  No Record to Display, Please add Records
+</h3>
 
 <!-- Modal -->
 <div
@@ -98,7 +104,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="personalDetails" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
+          <div class="col mb-3">
             <label for="exampleInputEmail1" class="form-label"
               >First Name</label
             >
@@ -109,8 +115,18 @@
               aria-describedby="emailHelp"
               formControlName="firstName"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                (personalDetails.controls['firstName'].dirty ||
+                  personalDetails.controls['firstName'].touched) &&
+                personalDetails.hasError('required', 'firstName')
+              "
+              >*Firstname is required</small
+            >
           </div>
-          <div class="mb-3">
+
+          <div class="col mb-3">
             <label for="exampleInputEmail1" class="form-label"
               >Email address</label
             >
@@ -121,8 +137,18 @@
               aria-describedby="emailHelp"
               formControlName="email"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                (personalDetails.controls['email'].dirty ||
+                  personalDetails.controls['email'].touched) &&
+                personalDetails.hasError('required', 'email')
+              "
+              >*Email is required</small
+            >
           </div>
-          <div class="mb-3">
+
+          <div class="col mb-3">
             <label for="exampleInputPassword1" class="form-label"
               >Mobile
             </label>
@@ -132,6 +158,15 @@
               id="exampleInputPassword1"
               formControlName="mobile"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                (personalDetails.controls['mobile'].dirty ||
+                  personalDetails.controls['mobile'].touched) &&
+                personalDetails.hasError('required', 'mobile')
+              "
+              >*Mobile number is required</small
+            >
           </div>
 
           <div class="form-check form-check-inline">
@@ -145,6 +180,7 @@
             />
             <label class="form-check-label" for="inlineRadio1">Male</label>
           </div>
+
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
@@ -155,6 +191,7 @@
             />
             <label class="form-check-label" for="inlineRadio2">Female</label>
           </div>
+
           <select
             class="form-select form-select-sm mb-3 mt-3"
             aria-label=".form-select-lg example"
@@ -179,8 +216,19 @@
           type="button"
           (click)="postPersonalInfo()"
           class="btn btn-primary"
+          [disabled]="!personalDetails.valid"
+          *ngIf="showAddBtn"
         >
           Add
+        </button>
+        <button
+          type="button"
+          (click)="updatePersondata()"
+          class="btn btn-primary"
+          [disabled]="!personalDetails.valid"
+          *ngIf="showUpdateBtn"
+        >
+          update
         </button>
       </div>
     </div>

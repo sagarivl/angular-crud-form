@@ -2,19 +2,19 @@
   "posts": [
     {
       "id": 1,
-      "firstName": "ijoji",
-      "email": "jbjb",
+      "firstName": "sagart",
+      "email": "e@g.com",
       "gender": "male",
-      "city": "pune",
-      "mobile": 98
+      "city": "jaipur",
+      "mobile": 565
     },
     {
       "id": 2,
-      "firstName": "",
-      "email": "",
+      "firstName": "dsdstest",
+      "email": "efe@h",
       "gender": "male",
       "city": "pune",
-      "mobile": ""
+      "mobile": 899988
     }
   ],
   "signupuser": [
@@ -24,6 +24,13 @@
       "mobile": 7887,
       "name": "sagar",
       "id": 1
+    },
+    {
+      "email": "sagar@g.com",
+      "password": "123456",
+      "mobile": 7778878,
+      "name": "sagar",
+      "id": 2
     }
   ],
   "profile": {

@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="mb-4">
+            <div class="col mb-3">
               <label for="username" class="form-label">Email</label>
               <input
                 type="text"
@@ -18,8 +18,18 @@
                 name="email"
                 formControlName="email"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  (loginForm.controls['email'].dirty ||
+                    loginForm.controls['email'].touched) &&
+                  loginForm.hasError('required', 'email')
+                "
+                >*Email is required</small
+              >
             </div>
-            <div class="mb-4">
+
+            <div class="col mb-3">
               <label for="password" class="form-label">Password</label>
               <input
                 type="password"
@@ -29,10 +39,25 @@
                 name="password"
                 formControlName="password"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  (loginForm.controls['password'].dirty ||
+                    loginForm.controls['password'].touched) &&
+                  loginForm.hasError('required', 'password')
+                "
+                >*Password is required</small
+              >
             </div>
 
             <div class="d-grid mb-3">
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button
+                [disabled]="!loginForm.valid"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Login
+              </button>
             </div>
           </form>
           <p>New User? click to <a routerLink="/signup">Sign-Up !!</a></p>

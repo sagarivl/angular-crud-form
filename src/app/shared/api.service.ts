@@ -12,6 +12,9 @@ export class ApiService {
   postInfo(data: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/posts', data);
   }
+  onUpdate(data: any, id: any): Observable<any> {
+    return this.http.put<any>(`http://localhost:3000/posts/${id}`, data);
+  }
   getInfo(): Observable<any> {
     return this.http.get<any>('http://localhost:3000/posts');
   }

@@ -18,6 +18,15 @@
                 formControlName="name"
               />
             </div>
+            <small
+              class="text-danger"
+              *ngIf="
+                (signupForm.controls['name'].dirty ||
+                  signupForm.controls['name'].touched) &&
+                signupForm.hasError('required', 'name')
+              "
+              >*Username is required</small
+            >
             <div class="mb-4">
               <label for="mobile" class="form-label">Mobile</label>
               <input
@@ -28,6 +37,15 @@
                 formControlName="mobile"
               />
             </div>
+            <small
+              class="text-danger"
+              *ngIf="
+                (signupForm.controls['mobile'].dirty ||
+                  signupForm.controls['mobile'].touched) &&
+                signupForm.hasError('required', 'mobile')
+              "
+              >*Mobile number is required</small
+            >
             <div class="mb-4">
               <label for="username" class="form-label">Email</label>
               <input
@@ -37,7 +55,17 @@
                 placeholder="Enter email"
                 formControlName="email"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  (signupForm.controls['email'].dirty ||
+                    signupForm.controls['email'].touched) &&
+                  signupForm.hasError('required', 'email')
+                "
+                >*Email is required</small
+              >
             </div>
+
             <div class="mb-4">
               <label for="password" class="form-label">Password</label>
               <input
@@ -47,10 +75,25 @@
                 placeholder="Enter password"
                 formControlName="password"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  (signupForm.controls['password'].dirty ||
+                    signupForm.controls['password'].touched) &&
+                  signupForm.hasError('required', 'password')
+                "
+                >*Password is required</small
+              >
             </div>
 
             <div class="d-grid mb-3">
-              <button type="submit" class="btn btn-primary">Signup</button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!signupForm.valid"
+              >
+                Signup
+              </button>
             </div>
           </form>
           <p>Already Register? click to<a routerLink="/login"> Login!!</a></p>

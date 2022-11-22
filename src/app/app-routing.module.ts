@@ -8,7 +8,12 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'navbar', component: NavbarComponent },
+  { path: 'dashboard', component: NavbarComponent },
+  // {
+  //   path: 'customers',
+  //   loadChildren: () =>
+  //     import('./customers/customers.module').then((m) => m.CustomersModule),
+  // },
 ];
 
 @NgModule({
