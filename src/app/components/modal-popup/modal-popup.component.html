@@ -1,100 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" style="color: #fff">Person Information-CRUD App</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" style="color: #fff" aria-current="page"
-            >home</a
-          >
-        </li>
-      </ul>
-
-      <button
-        type="button"
-        class="btn btn-success mx-3"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        (click)="clickAddInfoBtn()"
-      >
-        Add Info
-      </button>
-      <button type="button" class="btn btn-danger" (click)="logout()">
-        logout
-      </button>
-    </div>
-  </div>
-</nav>
-
-<app-table-list
-  [allData]="allData"
-  (notify)="onEdit($event)"
-  (delete)="deletePersonalInfo($event)"
-></app-table-list>
-<!-- <table class="table mt-3" *ngIf="allData?.length">
-  <thead>
-    <tr>
-      <th scope="co1">Employee ID</th>
-      <th scope="co1">First Name</th>
-     
-      <th scope="col">Email ID</th>
-      <th scope="col">Mobile No.</th>
-      <th scope="col">Gender</th>
-      <th scope="col">City</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let row of allData">
-      <td>{{ row.id }}</td>
-      <td>{{ row.firstName }}</td>
-      <td>{{ row.email }}</td>
-      <td>{{ row.mobile }}</td>
-      <td>{{ row.gender }}</td>
-      <td>{{ row.city }}</td>
-
-      <td>
-        <button
-          class="btn btn-primary btn-sm me-md-2"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          (click)="onEdit(row)"
-        >
-          Edit
-        </button>
-
-        <button (click)="deletePersonalInfo(row)" class="btn btn-danger btn-sm">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
-<h3 class="text-center mt-5" *ngIf="allData?.length === 0">
-  No Record to Display, Please add Records
-</h3>
-<app-modal-popup
-  [personalDetails]="personalDetails"
-  (PersonalInfo)="postPersonalInfo()"
-  [showAddBtn]="showAddBtn"
-  [showUpdateBtn]="showUpdateBtn"
-  (updatedata)="updatePersondata()"
-></app-modal-popup>
-<!-- Modal -->
-<!-- <div
+<div
   class="modal fade"
   id="exampleModal"
   tabindex="-1"
@@ -165,7 +69,7 @@
               >Mobile
             </label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               id="exampleInputPassword1"
               formControlName="mobile"
@@ -245,4 +149,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

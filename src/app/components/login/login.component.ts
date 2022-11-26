@@ -11,6 +11,7 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  RegisterUsers: any;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -20,6 +21,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const user = localStorage.getItem('username');
+    if (user) {
+      this.router.navigate(['dashboard']);
+    }
     this.loginForm = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -28,13 +33,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.api.login().subscribe(
       (res) => {
+        this.RegisterUsers = res;
+
         const userInfo = res.find(
           (user: any) =>
             user.email === this.loginForm.value.email &&
             user.password === this.loginForm.value.password
         );
         if (userInfo) {
-          //alert('login successfully');
+          localStorage.setItem('username', userInfo.name);
+
           this.toast.success({
             detail: 'Success',
             summary: 'login successfully',
@@ -42,7 +50,6 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset();
           this.router.navigate(['dashboard']);
         } else {
-          //alert('User not found');
           this.toast.error({
             detail: 'Error',
             summary: 'User not found',
@@ -50,13 +57,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset();
         }
       },
-      (err) => {
-        //alert('Something went wrong on login');
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Login Failed',
-        });
-      }
+      (err) => {}
     );
   }
 }

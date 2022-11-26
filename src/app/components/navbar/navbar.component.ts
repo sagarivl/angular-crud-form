@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PersonalModel } from 'src/app/personalInfo.model';
+
 import { ApiService } from '../../shared/api.service';
 import { NgToastService } from 'ng-angular-popup';
 import { NgConfirmService } from 'ng-confirm-box';
+import { Router } from '@angular/router';
+import { PersonalModel } from '../../model/personalInfo.model';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +23,8 @@ export class NavbarComponent implements OnInit {
     private formbuilder: FormBuilder,
     private api: ApiService,
     private toast: NgToastService,
-    private confirmService: NgConfirmService
+    private confirmService: NgConfirmService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.personalDetails = this.formbuilder.group({
@@ -53,7 +56,7 @@ export class NavbarComponent implements OnInit {
     this.api.postInfo(this.peronaldetailObj).subscribe(
       (res) => {
         console.log(res);
-        // alert('info added successfully');
+
         this.toast.success({
           detail: 'Success',
           summary: 'Record added successfully',
@@ -63,28 +66,28 @@ export class NavbarComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
       },
-      (err) => {
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Something went wrong while adding data',
-        });
-      }
+      (err) => {}
     );
   }
   getAllDetails() {
-    this.api.getInfo().subscribe((res) => {
-      console.log(res);
-      this.allData = res;
-    });
+    this.api.getInfo().subscribe(
+      (res) => {
+        console.log(res);
+        this.allData = res;
+      },
+      (err) => {}
+    );
   }
   deletePersonalInfo(row: any) {
-    //console.log(row);
     this.confirmService.showConfirm(
       'Are you sure want to Delete?',
       () => {
         //your logic if Yes clicked
         this.api.deleteInfo(row.id).subscribe(() => {
-          // alert('row deleted succesfully');
+          this.toast.success({
+            detail: 'Success',
+            summary: 'row deleted successfully',
+          });
           this.getAllDetails();
         });
       },
@@ -94,7 +97,6 @@ export class NavbarComponent implements OnInit {
     );
   }
   clickAddInfoBtn() {
-    // this.personalDetails.reset();
     this.showUpdateBtn = false;
     this.showAddBtn = true;
   }
@@ -117,7 +119,6 @@ export class NavbarComponent implements OnInit {
     this.api
       .onUpdate(this.peronaldetailObj, this.peronaldetailObj.id)
       .subscribe((res) => {
-        // alert('info added successfully');
         this.toast.success({
           detail: 'Success',
           summary: 'Record Updated successfully',
@@ -128,7 +129,11 @@ export class NavbarComponent implements OnInit {
         ref?.click();
       });
   }
+  logout() {
+    localStorage.removeItem('username');
+    this.router.navigate(['login']);
+  }
   onSubmit() {
-    console.log(this.personalDetails);
+    //console.log(this.personalDetails);
   }
 }

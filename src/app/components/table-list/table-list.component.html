@@ -1,0 +1,58 @@
+<div class="form-group">
+  <input
+    type="text"
+    class="form-control mt-3 mb-3 mx-3 w-25"
+    placeholder="Search..."
+    [(ngModel)]="filterTerm"
+  />
+</div>
+<table class="table mt-3" *ngIf="allData?.length">
+  <thead>
+    <tr>
+      <th scope="co1">Person ID</th>
+      <th scope="co1">First Name</th>
+      <th scope="col">Email ID</th>
+      <th scope="col">Mobile No.</th>
+      <th scope="col">Gender</th>
+      <th scope="col">City</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      *ngFor="
+        let row of allData
+          | filter: filterTerm
+          | paginate: { itemsPerPage: 3, currentPage: p }
+      "
+    >
+      <td>{{ row.id }}</td>
+      <td>{{ row.firstName }}</td>
+      <td>{{ row.email }}</td>
+      <td>{{ row.mobile }}</td>
+      <td>{{ row.gender }}</td>
+      <td>{{ row.city }}</td>
+
+      <td>
+        <button
+          class="btn btn-primary btn-sm me-md-2"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="onEdit(row)"
+        >
+          Edit
+        </button>
+
+        <button (click)="deletePersonalInfo(row)" class="btn btn-danger btn-sm">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls
+  (pageChange)="p = $event"
+  class="float-end"
+></pagination-controls>

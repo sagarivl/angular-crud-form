@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
     this.api.signUp(this.signupForm.value).subscribe(
       (res) => {
         console.log(res);
-        //alert('signup successfully');
+
         this.toast.success({
           detail: 'Success',
           summary: 'signup successfully',
@@ -47,13 +47,7 @@ export class SignupComponent implements OnInit {
         this.signupForm.reset();
         this.router.navigate(['login']);
       },
-      (err) => {
-        //alert('Something went wrong on signup');
-        this.toast.success({
-          detail: 'Error',
-          summary: 'Something went wrong on signup',
-        });
-      }
+      (err) => {}
     );
   }
 }
