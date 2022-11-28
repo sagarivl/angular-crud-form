@@ -20,6 +20,11 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('signup component');
+    const user = localStorage.getItem('username');
+    if (user) {
+      this.router.navigate(['dashboard']);
+    }
     this.signupForm = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

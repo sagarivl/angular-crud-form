@@ -17,6 +17,8 @@ import { TableListComponent } from './components/table-list/table-list.component
 import { ModalPopupComponent } from './components/modal-popup/modal-popup.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+// import { LoginModule } from './modules/general/login/login.module';
+// import { SignupModule } from './modules/general/signup/signup.module';
 
 @NgModule({
   declarations: [

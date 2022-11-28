@@ -1,5 +1,5 @@
 export class PersonalModel {
-  id?: number = 0;
+  id?: any;
   firstName?: string = '';
   email?: string = '';
   mobile?: number;

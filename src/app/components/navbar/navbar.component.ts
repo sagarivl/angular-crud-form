@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    console.log('dashbaord component');
     this.personalDetails = this.formbuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z].*')]],
       email: ['', [Validators.required, Validators.email]],
@@ -52,7 +53,7 @@ export class NavbarComponent implements OnInit {
     this.peronaldetailObj.mobile = this.personalDetails.value.mobile;
     this.peronaldetailObj.gender = this.personalDetails.value.gender;
     this.peronaldetailObj.city = this.personalDetails.value.city;
-
+    console.log(this.peronaldetailObj);
     this.api.postInfo(this.peronaldetailObj).subscribe(
       (res) => {
         console.log(res);
@@ -97,6 +98,10 @@ export class NavbarComponent implements OnInit {
     );
   }
   clickAddInfoBtn() {
+    this.personalDetails.reset();
+    this.peronaldetailObj.id = '';
+    this.personalDetails.controls['city'].setValue('pune');
+    this.personalDetails.controls['gender'].setValue('male');
     this.showUpdateBtn = false;
     this.showAddBtn = true;
   }
